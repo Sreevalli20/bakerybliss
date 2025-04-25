@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us - SweetCrumbs</title>
+  <link rel="stylesheet" href="assets/style1.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body>
+  <header class="bg-light p-3 shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h2 class="m-0 text-primary">Contact Us</h2>
+      <nav>
+        <a href="index.html" class="me-3">Home</a>
+        <a href="about.html" class="me-3">About</a>
+        <a href="menu.html">Menu</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container mt-5">
+    <h3>📞 Get in Touch</h3>
+    <form id="contact-form" class="mt-4">
+      <div class="mb-3">
+        <label for="name" class="form-label">Your Name</label>
+        <input type="text" id="name" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Your Email</label>
+        <input type="email" id="email" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea id="message" class="form-control" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+
+    <div class="mt-4">
+      <p><strong>Address:</strong> 123 Baker Street, Pastry Town</p>
+      <p><strong>Email:</strong> hello@sweetcrumbs.com</p>
+      <p><strong>Phone:</strong> +91-9876543210</p>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Thanks for contacting us! We'll get back to you soon. 😊");
+    });
+  </script>
+</body>
+</html>

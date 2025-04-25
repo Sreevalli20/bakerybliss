@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BakeBliss | Cart</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #fff8f1;
+        }
+
+        .sidebar, #cartSidebar {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        #cartSidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            border-left: 2px solid #ff7f50;
+            margin: 0;
+            border-radius: 0;
+            border-right: none;
+            border-top: none;
+            border-bottom: none;
+            background: #fff8f0;
+            box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn, a.btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Your Cart 🛒</h3>
+        <ul id="cart-items">
+            <li>Choco Lava Cake x 1 - ₹120</li>
+            <li>Vanilla Cupcake x 2 - ₹160</li>
+        </ul>
+        <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+
+    <div id="cartSidebar">
+        <h3>Your Cart</h3>
+        <ul id="cartItems"></ul>
+        <button onclick="checkout()" class="btn">Go to Checkout</button>
+    </div>
+
+    <script>
+        function checkout() {
+            window.location.href = "checkout.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bakery Menu</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff8f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            background: #ff6f61;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #ffcb8e;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .category-buttons button:hover {
+            background-color: #ffae5e;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+
+        .add-btn {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background-color: #388e3c;
+        }
+
+        .filter-btn.active {
+            background-color: #ff7043 !important;
+            color: white !important;
+        }
+
+        body {
+            background-color: #fff8f0;
+        }
+
+        .product-card {
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light p-3 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h2 class="m-0 text-primary">SweetCrumbs Bakery</h2>
+            <nav>
+                <a href="index.html" class="me-3">Home</a>
+                <a href="menu.html" class="me-3">Menu</a>
+                <a href="cart.html" class="me-3">Cart</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">🍰 Our Delicious Menu</h2>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search for bakery items...">
+            </div>
+            <div class="col-md-6 text-end">
+                <select id="sortSelect" class="form-select w-auto d-inline-block">
+                    <option value="default">Sort by</option>
+                    <option value="low">Price: Low to High</option>
+                    <option value="high">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mb-4 flex-wrap">
+            <button class="btn btn-outline-dark m-2 filter-btn active" data-category="all">All</button>
+            <button class="btn btn-outline-danger m-2 filter-btn" data-category="cakes">Cakes</button>
+            <button class="btn btn-outline-warning m-2 filter-btn" data-category="breads">Breads</button>
+            <button class="btn btn-outline-success m-2 filter-btn" data-category="cookies">Cookies</button>
+            <button class="btn btn-outline-primary m-2 filter-btn" data-category="cupcakes">Cupcakes</button>
+        </div>
+
+        <main id="product-list" class="row product-grid">
+            <div class="col-md-4 product-card" data-category="cakes">
+                <div class="card">
+                    <img src="assets/images/choco-cake.jpg" class="card-img-top" alt="Chocolate Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Chocolate Cake</h5>
+                        <p class="card-text">Rich chocolate layered cake</p>
+                        <p>₹250</p>
+                        <button class="btn btn-main" onclick="addToCart(1, 'Chocolate Cake', 250, 'assets/images/choco-cake.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 product-card" data-category="cupcakes">
+                <div class="card">
+                    <img src="assets/images/vanilla-cupcake.jpg" class="card-img-top" alt="Vanilla Cupcake">
+                    <div class="card-body">
+                        <h5 class="card-title">Vanilla Cupcake</h5>
+                        <p class="card-text">Fluffy vanilla cupcakes</p>
+                        <p>₹60</p>
+                        <button class="btn btn-main" onclick="addToCart(2, 'Vanilla Cupcake', 60, 'assets/images/vanilla-cupcake.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 product-card" data-category="breads">
+                <div class="card">
+                    <img src="assets/images/garlic-bread.jpg" class="card-img-top" alt="Garlic Bread">
+                    <div class="card-body">
+                        <h5 class="card-title">Garlic Bread</h5>
+                        <p class="card-text">Crispy cheesy garlic bread</p>
+                        <p>₹80</p>
+                        <button class="btn btn-main" onclick="addToCart(3, 'Garlic Bread', 80, 'assets/images/garlic-bread.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 product-card" data-category="cookies">
+                <div class="card">
+                    <img src="assets/images/cookie.jpg" class="card-img-top" alt="Cookies" />
+                    <div class="card-body">
+                        <h5 class="card-title">Chocolate Chip Cookies</h5>
+                        <p class="card-text">Crispy on the edges, chewy in the center. 🍪</p>
+                        <p>₹120</p>
+                        <button class="btn btn-main" onclick="addToCart(4, 'Chocolate Chip Cookies', 120, 'assets/images/chocolate chip cookie.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="modal fade" id="productModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body d-flex">
+                        <img id="modalImg" class="img-fluid w-50 rounded" alt="">
+                        <div class="p-4">
+                            <h4 id="modalTitle"></h4>
+                            <p id="modalDesc"></p>
+                            <p><strong>Price: ₹<span id="modalPrice"></span></strong></p>
+                            <button class="btn btn-success">Add to Cart</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Chocolate Cake", price: 450, category: "Cakes", img: "assets/images/choco-cake.jpg", desc: "Delicious layered chocolate cake." },
+            { id: 2, name: "Vanilla Cupcake", price: 60, category: "Cupcakes", img: "assets/images/vanilla-cupcake.jpg", desc: "Soft vanilla cupcake with cream topping." },
+            { id: 3, name: "Whole Wheat Bread", price: 80, category: "Breads", img: "assets/images/whole wheat bread.jpg", desc: "Healthy whole wheat bread." },
+            { id: 4, name: "Oatmeal Cookies", price: 120, category: "Cookies", img: "assets/images/oatmeal cookie.jpg", desc: "Crispy oatmeal cookies." },
+            { id: 5, name: "Black Forest Cake", price: 550, category: "Cakes", img: "assets/images/blackforest.jpg", desc: "Creamy black forest delight." },
+            { id: 6, name: "Red Velvet Cupcake", price: 75, category: "Cupcakes", img: "assets/images/redvelvet.jpg", desc: "Classic red velvet cupcake." },
+            { id: 7, name: "Garlic Bread", price: 60, category: "Breads", img: "assets/images/garlic-bread.jpg", desc: "Soft garlic butter bread." },
+            { id: 8, name: "Choco Chip Cookies", price: 100, category: "Cookies", img: "assets/images/chocolate chip cookie.jpg", desc: "Rich chocolate chip cookies." }
+        ];
+
+        function displayProducts(filtered) {
+            const container = document.getElementById("product-list");
+            container.innerHTML = "";
+
+            filtered.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "col-md-4 product-card";
+                card.dataset.category = product.category.toLowerCase();
+                card.innerHTML = `
+                    <div class="card">
+                        <img src="${product.img}" class="card-img-top" alt="${product.name}" />
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.desc}</p>
+                            <p>₹${product.price}</p>
+                            <button class="btn btn-main" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+            document.querySelector(`.filter-btn[data-category="${cat.toLowerCase()}"]`).classList.add("active");
+            if (cat === "all") {
+                displayProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category.toLowerCase() === cat.toLowerCase());
+                displayProducts(filtered);
+            }
+        }
+
+        function addToCart(id, name, price, imgSrc) {
+            alert(`${name} added to cart for ₹${price}!`);
+            // You can expand this with localStorage cart handling if needed
+            console.log(`Added: ${name} (ID: ${id}), Price: ${price}, Image: ${imgSrc}`);
+        }
+
+        window.onload = () => {
+            displayProducts(products);
+        };
+
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterCategory(btn.dataset.category);
+            });
+        });
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

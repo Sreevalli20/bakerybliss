@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rate Your Experience</title>
+  <style>
+    body {
+      font-family: Verdana;
+      padding: 20px;
+    }
+    .stars {
+      font-size: 30px;
+      color: gray;
+      cursor: pointer;
+    }
+    .stars.active {
+      color: orange;
+    }
+    textarea {
+      margin-top: 15px;
+      width: 100%;
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Rate Our Service</h2>
+  <div class="stars" id="starContainer">
+    ★★★★★
+  </div>
+  <textarea id="feedback" placeholder="Leave a comment..."></textarea>
+  <button onclick="submitRating()">Submit</button>
+  <script>
+    const stars = document.getElementById("starContainer");
+
+    stars.addEventListener("click", function (e) {
+      const rating = e.target;
+      stars.classList.add("active");
+    });
+
+    function submitRating() {
+      const comment = document.getElementById("feedback").value;
+      alert("Thanks for your feedback!\n" + comment);
+    }
+  </script>
+</body>
+</html>

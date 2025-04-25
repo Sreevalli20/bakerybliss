@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spin the Wheel</title>
+    <link rel="stylesheet" href="assets/style1.css">
+    <a class="navbar-brand" href="index.html">
+        <strong>BakeBliss 🍪</strong>
+    </a>
+    <style>
+        .wheel {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff6f61 0% 25%, 
+                #ffb347 25% 50%, 
+                #f7cac9 50% 75%, 
+                #ff6f61 75% 100%
+            );
+            margin: 2rem auto;
+            transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333; /* Dark text for readability */
+        }
+
+        .wheel.spin {
+            transform: rotate(1440deg); /* 4 full spins */
+        }
+
+        #spinBtn {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 1rem auto;
+        }
+
+        #spinBtn:hover {
+            background-color: #e65a4d; /* Slightly darker on hover */
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 2rem;
+            color: #ff6f61; /* Use a color from the wheel */
+        }
+    </style>
+</head>
+<body>
+    <h2>🎉 Spin & Win Offers 🎉</h2>
+    <button id="spinBtn" class="btn">Click to Spin!</button>
+    <div id="wheel" class="wheel"></div>
+
+    <script>
+        function spin() {
+            const offers = ["10% Off", "Free Cupcake", "No Luck", "Buy 1 Get 1"];
+            const random = offers[Math.floor(Math.random() * offers.length)];
+            document.getElementById("wheel").innerText = `You got: ${random}`;
+        }
+
+        const spinBtn = document.getElementById("spinBtn");
+        const wheel = document.getElementById("wheel");
+
+        spinBtn.addEventListener("click", () => {
+            wheel.classList.remove("spin"); // Reset spin
+            void wheel.offsetWidth; // Trigger reflow
+            wheel.classList.add("spin"); // Apply spin again
+            spin(); // Display the result
+        });
+    </script>
+</body>
+</html>

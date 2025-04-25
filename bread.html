@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bakery Breads</title>
+  <link rel="stylesheet" href="assets/style1.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #d2691e;
+      margin-bottom: 30px;
+    }
+
+    .bread-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .bread-card {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      width: 250px;
+      padding: 15px;
+      border-radius: 10px;
+      transition: 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .bread-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .bread-card h3 {
+      margin-bottom: 5px;
+      color: #8b4513;
+    }
+
+    .bread-card p {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .bread-card .price {
+      color: #e65100;
+      font-weight: bold;
+    }
+
+    .bread-card button {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .bread-card button:hover {
+      background: #f57c00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Delicious Breads</h1>
+  <div class="bread-container" id="breadList"></div>
+
+  <script>
+    const breads = [
+      {
+        name: "Classic White Bread",
+        price: "₹40",
+        desc: "Soft and fluffy white bread, perfect for sandwiches and toasts."
+      },
+      {
+        name: "Whole Wheat Bread",
+        price: "₹50",
+        desc: "Healthy and nutritious bread made from 100% whole wheat flour."
+      },
+      {
+        name: "Multigrain Bread",
+        price: "₹60",
+        desc: "A mix of grains and seeds for a wholesome bite."
+      },
+      {
+        name: "Garlic Bread Loaf",
+        price: "₹70",
+        desc: "Infused with garlic and herbs, perfect as a side or snack."
+      },
+      {
+        name: "Brioche Bread",
+        price: "₹90",
+        desc: "Sweet, rich and buttery bread – a French favorite."
+      },
+      {
+        name: "Focaccia",
+        price: "₹80",
+        desc: "Italian-style bread with olive oil, herbs, and seasoning."
+      },
+      {
+        name: "Rye Bread",
+        price: "₹65",
+        desc: "Dense and flavorful, great for hearty sandwiches."
+      },
+      {
+        name: "Sourdough Bread",
+        price: "₹85",
+        desc: "Naturally fermented bread with a tangy flavor."
+      }
+    ];
+
+    const breadList = document.getElementById("breadList");
+
+    breads.forEach(bread => {
+      const card = document.createElement("div");
+      card.className = "bread-card";
+
+      card.innerHTML = `
+        <h3>${bread.name}</h3>
+        <p>${bread.desc}</p>
+        <p class="price">${bread.price}</p>
+        <button onclick="addToCart('${bread.name}')">Add to Cart</button>
+      `;
+
+      breadList.appendChild(card);
+    });
+
+    function addToCart(breadName) {
+      alert(`${breadName} added to cart! 🛒`);
+    }
+  </script>
+</body>
+</html>

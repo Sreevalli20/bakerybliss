@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BakeBliss Cupcakes</title>
+  <link rel="stylesheet" href="assets/style1.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #fff7f0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d35400;
+    }
+
+    .cupcake-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #e67e22;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .card span {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+      color: #2e8b57;
+    }
+
+    button {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Delicious Cupcakes</h1>
+  <div class="cupcake-container" id="cupcakeList"></div>
+  <script>
+    const cupcakes = [
+      {
+        name: "Classic Vanilla",
+        desc: "Soft and moist vanilla cupcake",
+        price: 60,
+        img: "assets/images/b4.jpg"
+      },
+      {
+        name: "Choco Fudge",
+        desc: "Rich chocolate cupcake with ganache",
+        price: 75,
+        img: "assets/images/a4.jpg"
+      },
+      {
+        name: "Strawberry Swirl",
+        desc: "Strawberry-filled cupcake with frosting",
+        price: 70,
+        img: "assets/images/c4.jpg"
+      },
+      {
+        name: "Red Velvet Delight",
+        desc: "Red velvet cupcake with cream cheese top",
+        price: 80,
+        img: "assets/images/d4.jpg"
+      },
+      {
+        name: "Coffee Craze",
+        desc: "Espresso cupcake with mocha frosting",
+        price: 70,
+        img: "assets/images/e4.jpg"
+      },
+      {
+        name: "Mango Magic",
+        desc: "Tropical mango flavored cupcake",
+        price: 65,
+        img: "assets/images/f4.jpg"
+      }
+    ];
+
+    const list = document.getElementById("cupcakeList");
+
+    cupcakes.forEach(cake => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <img src="${cake.img}" alt="${cake.name}">
+        <h3>${cake.name}</h3>
+        <p>${cake.desc}</p>
+        <span>₹${cake.price}</span>
+        <button onclick="addToCart('${cake.name}', ${cake.price})">Add to Cart</button>
+      `;
+      list.appendChild(div);
+    });
+
+    function addToCart(name, price) {
+      alert(`✅ ${name} added to cart!\nPrice: ₹${price}`);
+    }
+  </script>
+</body>
+</html>

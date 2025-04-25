@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BakeBliss Cakes</title>
+  
+  <link rel="stylesheet" href="assets/style1.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff5f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .title {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 30px;
+    }
+
+    .cake-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 10px;
+    }
+
+    .cake-card {
+      background: white;
+      border: 1px solid #ffd6e8;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 8px #ffe0ee;
+      transition: 0.3s ease;
+    }
+
+    .cake-card:hover {
+      transform: scale(1.03);
+    }
+
+    .cake-card h3 {
+      margin: 0;
+      color: #c2185b;
+    }
+
+    .cake-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .cake-card .price {
+      font-weight: bold;
+      margin: 10px 0;
+      color: #6a1b9a;
+    }
+
+    .cake-card button {
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .cake-card button:hover {
+      background-color: #e91e63;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">🍰 BakeBliss Cake Menu</h1>
+  <div class="cake-container" id="cakeList"></div>
+  <script>
+    const cakes = [
+      {
+        name: "Chocolate Truffle Cake",
+        price: "₹550",
+        description: "Rich and gooey chocolate truffle layered with chocolate ganache."
+      },
+      {
+        name: "Vanilla Strawberry Cake",
+        price: "₹499",
+        description: "Soft vanilla sponge with fresh strawberry cream and fruit topping."
+      },
+      {
+        name: "Red Velvet Cake",
+        price: "₹600",
+        description: "Classic red velvet with luscious cream cheese frosting."
+      },
+      {
+        name: "Black Forest Cake",
+        price: "₹520",
+        description: "Layers of chocolate sponge, whipped cream, and cherries."
+      },
+      {
+        name: "Pineapple Delight Cake",
+        price: "₹480",
+        description: "Tropical pineapple-flavored sponge with vanilla cream."
+      },
+      {
+        name: "KitKat Chocolate Cake",
+        price: "₹699",
+        description: "Chocolate cake topped with KitKat bars and choco drizzle."
+      },
+      {
+        name: "Butterscotch Crunch Cake",
+        price: "₹580",
+        description: "Caramel-flavored cake with crunchy butterscotch toppings."
+      },
+      {
+        name: "Mango Magic Cake",
+        price: "₹620",
+        description: "Seasonal mango cake with creamy mango layers and fresh pulp."
+      }
+    ];
+
+    const container = document.getElementById("cakeList");
+
+    cakes.forEach((cake) => {
+      const card = document.createElement("div");
+      card.className = "cake-card";
+
+      card.innerHTML = `
+        <h3>${cake.name}</h3>
+        <p class="price">${cake.price}</p>
+        <p>${cake.description}</p>
+        <button onclick="addToCart('${cake.name}', '${cake.price}')">Add to Cart</button>
+      `;
+
+      container.appendChild(card);
+    });
+
+    function addToCart(name, price) {
+      alert(`✅ ${name} added to cart for ${price}`);
+    }
+  </script>
+</body>
+</html>

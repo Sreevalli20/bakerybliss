@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Best Sellers - BakeBliss</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css" />
+    <a class="navbar-brand" href="index.html">
+        <strong>BakeBliss 🍪</strong>
+    </a>
+    <style>
+        body {
+            background: #fffaf2;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .card img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .rating {
+            color: #ffc107;
+        }
+
+        .btn-cart {
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-cart:hover {
+            background-color: #e84141;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">🌟 Best Sellers</h2>
+    <div class="row" id="bestSellersContainer"></div>
+</div>
+
+<script>
+    const bestSellers = [
+        {
+            name: "Chocolate Truffle Cake",
+            image: "assets/images/truffle.jpg",
+            price: 499,
+            rating: 5,
+            description: "Rich chocolate delight topped with ganache."
+        },
+        {
+            name: "Red Velvet Cupcake",
+            image: "assets/images/redvelvet.jpg",
+            price: 99,
+            rating: 4,
+            description: "Smooth velvet cupcake with cream cheese frosting."
+        },
+        {
+            name: "Blueberry Cheesecake",
+            image: "assets/images/blueberry.jpg",
+            price: 450,
+            rating: 5,
+            description: "Classic cheesecake topped with blueberries."
+        },
+        {
+            name: "Choco Chip Cookie",
+            image: "assets/images/chocochip.jpg",
+            price: 50,
+            rating: 4,
+            description: "Crispy cookies loaded with chocolate chips."
+        },
+        {
+            name: "Garlic Cheese Bread",
+            image: "assets/images/cheesegarlic.jpg",
+            price: 75,
+            rating: 5,
+            description: "Crusty bread with garlic butter and melted cheese."
+        },
+        {
+            name: "Fruit Pastry",
+            image: "assets/images/fruit.jpg",
+            price: 75,
+            rating: 4,
+            description: "Delicate pastry topped with fresh seasonal fruits."
+        }
+    ];
+
+    const container = document.getElementById("bestSellersContainer");
+
+    bestSellers.forEach((item) => {
+        container.innerHTML += `
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="${item.image}" alt="${item.name}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name}</h5>
+                        <p class="card-text text-muted">${item.description}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">₹${item.price}</span>
+                            <span class="rating">${'⭐'.repeat(item.rating)}</span>
+                        </div>
+                        <button class="btn btn-cart mt-3 w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+</script>
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

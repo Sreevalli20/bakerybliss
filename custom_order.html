@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Order - BakeBliss</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style1.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Customize Your Order</h1>
+    <form id="customOrderForm">
+      <div class="mb-3">
+        <label for="cakeType" class="form-label">Cake Type</label>
+        <input type="text" class="form-control" id="cakeType" required>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Custom Message</label>
+        <textarea class="form-control" id="message" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="deliveryDate" class="form-label">Delivery Date</label>
+        <input type="date" class="form-control" id="deliveryDate" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Place Custom Order</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('customOrderForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('🎉 Custom order placed successfully!');
+    });
+  </script>
+</body>
+</html>

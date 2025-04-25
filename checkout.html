@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Checkout | BakeBliss</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        .checkout-body {
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .dark-mode .navbar, .dark-mode footer {
+            background-color: #212529 !important;
+            color: white;
+        }
+
+        .dark-mode .card {
+            background-color: #495057;
+            color: white;
+        }
+
+        .dark-mode .list-group-item {
+            background-color: #495057;
+            color: white;
+        }
+
+        .dark-mode .btn-outline-dark {
+            color: white;
+            border-color: white;
+        }
+
+        .dark-mode .btn-outline-dark:hover {
+            background-color: #495057;
+            border-color: #495057;
+        }
+
+        .chatbot-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .checkout-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fffbe7;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body class="checkout-body">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="index.html">🥐 BakeBliss</a>
+        <div class="d-flex align-items-center">
+            <button id="themeToggle" class="btn btn-sm btn-outline-dark me-2">🌙 Dark</button>
+            <a href="cart.html" class="btn btn-sm btn-outline-primary">← Back to Cart</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">🧾 Checkout</h2>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h5>📍 Delivery Details</h5>
+                <form id="checkoutForm">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Delivery Address</label>
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Method</label>
+                        <select class="form-select" required>
+                            <option value="COD">Cash on Delivery</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Card">Credit/Debit Card</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Place Order</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h5>🧁 Order Summary</h5>
+                <ul id="orderSummary" class="list-group mb-3">
+                </ul>
+                <div class="text-end fw-bold fs-5">
+                    Total: ₹<span id="checkoutTotal">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center bg-dark text-white p-3">
+    &copy; 2025 BakeBliss 🍰 | Thank you for ordering!
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const summary = document.getElementById("orderSummary");
+        const totalElement = document.getElementById("checkoutTotal");
+        let total = 0;
+
+        summary.innerHTML = "";
+
+        cart.forEach(item => {
+            const itemTotal = item.qty * item.price;
+            total += itemTotal;
+            summary.innerHTML += `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${item.name} x${item.qty}
+                    <span>₹${itemTotal}</span>
+                </li>
+            `;
+        });
+
+        totalElement.innerText = total;
+    });
+
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("🎉 Order placed successfully!\nYour delicious items are on the way.");
+        localStorage.removeItem("cartItems");
+        window.location.href = "index.html";
+    });
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        document.getElementById("themeToggle").innerText =
+            document.body.classList.contains("dark-mode") ? "☀️ Light" : "🌙 Dark";
+    });
+
+    function openChat() {
+        window.open("chatbot.html", "ChatBot", "width=400,height=600");
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<button onclick="openChat()" class="chatbot-btn">💬 Chat</button>
+</body>
+</html>

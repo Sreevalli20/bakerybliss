@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BakeBliss Cookie Products</title>
+  <link rel="stylesheet" href="assets/style1.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffef5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .title {
+      color: #d2691e;
+      margin-bottom: 30px;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cookie-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .cookie-card img {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .cookie-name {
+      font-size: 1.2em;
+      color: #8b4513;
+      margin: 10px 0 5px;
+    }
+
+    .cookie-price {
+      color: #ff5722;
+      font-weight: bold;
+    }
+
+    .cookie-desc {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">🍪 Cookie Delights at BakeBliss 🍪</h1>
+  <div class="product-grid" id="cookieList"></div>
+
+  <script>
+    const cookies = [
+      {
+        name: "Classic Chocolate Chip",
+        price: "₹149 per box",
+        image: "assets/images/a7.jpg",
+        desc: "Crispy on the edges, gooey in the center with loads of choco chips!"
+      },
+      {
+        name: "Red Velvet Cookies",
+        price: "₹199 per box",
+        image: "assets/images/b7.jpg",
+        desc: "Rich red velvet cookies topped with white choco drizzle."
+      },
+      {
+        name: "Nutty Oatmeal Bites",
+        price: "₹179 per box",
+        image: "assets/images/c7.jpg",
+        desc: "Wholesome oats & crunchy nuts for a healthy treat."
+      },
+      {
+        name: "Double Choco Fudge",
+        price: "₹189 per box",
+        image: "assets/images/d7.jpg",
+        desc: "Choco dough + choco chips = Double the love!"
+      },
+      {
+        name: "Buttery Shortbread",
+        price: "₹129 per box",
+        image: "assets/images/e7.jpg",
+        desc: "Classic melt-in-mouth buttery goodness."
+      }
+    ];
+
+    const container = document.getElementById("cookieList");
+
+    cookies.forEach(cookie => {
+      const card = document.createElement("div");
+      card.className = "cookie-card";
+      card.innerHTML = `
+        <img src="${cookie.image}" alt="${cookie.name}">
+        <div class="cookie-name">${cookie.name}</div>
+        <div class="cookie-price">${cookie.price}</div>
+        <div class="cookie-desc">${cookie.desc}</div>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chatbot - SweetCrumbs</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <a class="navbar-brand" href="index.html">
+        <strong>BakeBliss 🍪</strong>
+    </a>
+    <style>
+        body {
+            background: #fef5ef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .chat-container {
+            background: white;
+            width: 400px;
+            height: 550px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #ff7043;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .chat-msg {
+            margin-bottom: 10px;
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+        }
+        .user-msg {
+            background: #c8e6c9;
+            align-self: flex-end;
+        }
+        .bot-msg {
+            background: #f0f0f0;
+            align-self: flex-start;
+        }
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+        #userInput {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        #sendBtn {
+            background: #ff7043;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">🍪 SweetCrumbs Assistant</div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot-msg">Hi there! How can I help you today? 😊</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+    </div>
+</div>
+
+<script>
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatBody = document.getElementById("chatBody");
+
+    const responses = {
+        "hi": "Hello! How can I assist you with your bakery needs today?",
+        "order": "You can browse our menu and add items to your cart. 🍰",
+        "delivery": "We offer same-day delivery within the city. 🚚",
+        "cakes": "Our specialty cakes include chocolate, red velvet, and more!",
+        "payment": "We accept UPI, cards, and COD for your convenience.",
+        "bye": "Goodbye! Have a sweet day! 🍪"
+    };
+
+    function appendMessage(msg, type = "bot") {
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("chat-msg", type === "user" ? "user-msg" : "bot-msg");
+        msgDiv.textContent = msg;
+        chatBody.appendChild(msgDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+        msg = msg.toLowerCase();
+        return responses[msg] || "Sorry, I didn't get that. Try asking about cakes, delivery, or payment.";
+    }
+
+    sendBtn.addEventListener("click", () => {
+        const msg = userInput.value.trim();
+        if (msg !== "") {
+            appendMessage(msg, "user");
+            setTimeout(() => {
+                appendMessage(getBotReply(msg), "bot");
+            }, 600);
+            userInput.value = "";
+        }
+    });
+
+    userInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            sendBtn.click();
+        }
+    });
+</script>
+</body>
+</html>

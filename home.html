@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <a class="navbar-brand" href="index.html">
+        <strong>BakeBliss 🍪</strong>
+    </a>
+    <style>
+      .card {
+    transition: transform 0.2s ease-in-out;
+    border-radius: 16px;
+    background-color: #fff; /* Light background for card */
+    box-shadow: 0 4px 8px rgba(236, 206, 98, 0.548); /* Subtle shadow */
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(66, 135, 245, 0.2); /* Soft blue shadow on hover */
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light px-4">
+        <span class="navbar-brand mb-0 h1"></span>
+        <a href="cartSidebar.html" class="btn btn-outline-primary">🛒 Cart</a>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>🍰 What are you craving today?</h2>
+        <div class="row" id="product-list">
+            </div>
+    </div>
+
+    <script>
+        const products = [
+            { name: "Choco Lava Cake", price: "₹120", img: "/assets/images/items/choco lava cake.jpg" },
+            { name: "Vanilla Cupcake", price: "₹80", img: "/assets/images/items/vanilla cup cake.jpg" },
+            { name: "Strawberry Cheesecake", price: "₹150", img: "/assets/images/items/strawberry cheesecake.jpg" },
+        ];
+
+        const list = document.getElementById("product-list");
+
+        products.forEach(product => {
+            list.innerHTML += `
+                <div class="col-md-3">
+                    <div class="card p-2">
+                        <img src="${product.img}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.price}</p>
+                            <button class="btn btn-success">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Track Order</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <style>
+    body {
+      padding: 20px;
+      font-family: Arial;
+    }
+    #orderStatus {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Track Your Cake Order</h2>
+  <input type="text" id="orderId" placeholder="Enter Order ID">
+  <button onclick="trackOrder()">Track</button>
+  <div id="orderStatus"></div>
+  <script>
+    function trackOrder() {
+      const id = document.getElementById("orderId").value;
+      const statusBox = document.getElementById("orderStatus");
+      if (id.trim() !== "") {
+        statusBox.textContent = "Your cake is out for delivery! 🎂🚚";
+      } else {
+        statusBox.textContent = "Please enter a valid Order ID.";
+      }
+    }
+  </script>
+</body>
+</html>

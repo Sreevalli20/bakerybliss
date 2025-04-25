@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BakeBliss Bot</title>
+    <style>
+        .chat-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: #fff0f6;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        #messages {
+            height: 200px;
+            overflow-y: auto;
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+        }
+
+        input {
+            width: 70%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 25%;
+            padding: 8px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <p><strong>Bot:</strong> Hello! Need help finding something sweet?</p>
+        </div>
+        <input type="text" id="userInput" placeholder="Type here...">
+        <button onclick="sendMsg()">Send</button>
+    </div>
+    <script>
+        function sendMsg() {
+            const input = document.getElementById("userInput");
+            const msgBox = document.getElementById("messages");
+            const userMsg = input.value;
+            msgBox.innerHTML += `<p><strong>You:</strong> ${userMsg}</p>`;
+            let reply = "Sorry, I didn’t get that!";
+            if (userMsg.toLowerCase().includes("cake")) {
+                reply = "You can check out our Choco Lava and Cheesecake on the homepage!";
+            } else if (userMsg.toLowerCase().includes("offer")) {
+                reply = "🎉 Today's offer: Buy 2 cupcakes, get 1 free!";
+            }
+            msgBox.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+            input.value = "";
+        }
+    </script>
+</body>
+</html>

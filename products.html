@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bakery Specials</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9fafb;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #222;
+        }
+
+        .category-buttons {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category-buttons button {
+            padding: 12px 25px;
+            font-size: 18px;
+            background: #fff6f0;
+            border: 2px solid #ffe0c0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #222;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .category-buttons button:hover {
+            background-color: #ffcc99;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            width: 220px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        .product-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .product-card .price {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .product-card button {
+            background-color: #ffd700;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <section class="specials">
+        <h1>Our Specials</h1>
+        <div class="category-buttons">
+            <button onclick="filterCategory('cakes')">🍰 Cakes</button>
+            <button onclick="filterCategory('breads')">🍞 Breads</button>
+            <button onclick="filterCategory('cookies')">🍪 Cookies</button>
+            <button onclick="filterCategory('cupcakes')">🧁 Cupcakes</button>
+        </div>
+        <h2 id="categoryTitle">Cakes</h2>
+        <div id="productList" class="product-list">
+            </div>
+    </section>
+
+    <script>
+        const products = {
+            cakes: [
+                { name: "Chocolate Cake", desc: "Rich & moist", price: "₹300", img: "https://source.unsplash.com/220x140/?chocolate-cake" },
+                { name: "Vanilla Cake", desc: "Classic taste", price: "₹280", img: "https://source.unsplash.com/220x140/?vanilla-cake" }
+            ],
+            breads: [
+                { name: "Garlic Bread", desc: "Crispy & buttery", price: "₹150", img: "https://source.unsplash.com/220x140/?garlic-bread" },
+                { name: "Baguette", desc: "Traditional French", price: "₹100", img: "https://source.unsplash.com/220x140/?baguette" }
+            ],
+            cookies: [
+                { name: "Choco Chip", desc: "Crunchy choco blast", price: "₹80", img: "https://source.unsplash.com/220x140/?choco-chip-cookies" },
+                { name: "Oatmeal", desc: "Healthy treat", price: "₹90", img: "https://source.unsplash.com/220x140/?oatmeal-cookies" }
+            ],
+            cupcakes: [
+                { name: "Strawberry", desc: "Fruity & sweet", price: "₹70", img: "https://source.unsplash.com/220x140/?strawberry-cupcake" },
+                { name: "Red Velvet", desc: "Delicious red cocoa", price: "₹85", img: "https://source.unsplash.com/220x140/?red-velvet-cupcake" }
+            ]
+        };
+
+        function filterCategory(category) {
+            document.getElementById("categoryTitle").innerText = category.charAt(0).toUpperCase() + category.slice(1);
+            const list = document.getElementById("productList");
+            list.innerHTML = "";
+
+            products[category].forEach(item => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" />
+                    <h3>${item.name}</h3>
+                    <p>${item.desc}</p>
+                    <div class="price">${item.price}</div>
+                    <button onclick="addToCart('${item.name}')">Add to Cart</button>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addToCart(item) {
+            alert(`${item} added to cart!`);
+        }
+
+        window.onload = () => filterCategory('cakes');
+    </script>
+</body>
+</html>

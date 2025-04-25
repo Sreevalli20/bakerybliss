@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bakery Menu - BakeBliss</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #fff8f0;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .rating {
+      color: #ffc107;
+    }
+    .offcanvas-end {
+      width: 350px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <a class="navbar-brand" href="index.html"><h2>🍰 BakeBliss Menu</h2></a>
+    <div>
+      <input type="text" class="form-control d-inline w-auto" id="searchInput" placeholder="Search items...">
+      <select class="form-select d-inline w-auto" id="categoryFilter">
+        <option value="All">All</option>
+        <option value="Cake">Cake</option>
+        <option value="Cupcake">Cupcake</option>
+        <option value="Bread">Bread</option>
+        <option value="Cookie">Cookie</option>
+        <option value="Pastry">Pastry</option>
+      </select>
+      <button class="btn btn-dark ms-2" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer">🛒 Cart</button>
+    </div>
+  </div>
+
+  <div class="row" id="menuContainer"></div>
+</div>
+
+<!-- Cart Drawer -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartDrawer">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Your Cart</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" id="cartBody">
+    <p class="text-muted">No items in cart.</p>
+  </div>
+  <div class="p-3 border-top">
+    <h6>Total: ₹<span id="cartTotal">0</span></h6>
+    <button class="btn btn-success w-100 mt-2" onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+  const products = [
+    { name: "Chocolate Truffle Cake", category: "Cake", image: "assets/images/truffle.jpg", price: 499, rating: 5, description: "Decadent chocolate sponge and truffle cream." },
+    { name: "Red Velvet Cupcake", category: "Cupcake", image: "assets/images/d4.jpg", price: 99, rating: 4, description: "Rich cupcake with velvet flavor." },
+    { name: "Garlic Cheese Bread", category: "Bread", image: "assets/images/cheesegarlic.jpg", price: 75, rating: 5, description: "Topped with garlic butter and cheese." },
+    { name: "Almond Cookie", category: "Cookie", image: "assets/images/almond.jpg", price: 55, rating: 4, description: "Crunchy almond delight." },
+    { name: "Strawberry Pastry", category: "Pastry", image: "assets/images/a8.jpg", price: 70, rating: 3, description: "Whipped cream with strawberry sponge." },
+    { name: "Blueberry Cheesecake", category: "Cake", image: "assets/images/blueberry.jpg", price: 450, rating: 5, description: "Smooth cheesecake topped with blueberries." },
+    { name: "Vanilla Cupcake", category: "Cupcake", image: "assets/images/b4.jpg", price: 89, rating: 4, description: "Classic vanilla cupcake with frosting." },
+    { name: "Multigrain Bread", category: "Bread", image: "assets/images/b8.jpg", price: 60, rating: 4, description: "Healthy mix of grains and seeds." },
+    { name: "Choco Chip Cookie", category: "Cookie", image: "assets/images/chocolate chip cookie.jpg", price: 50, rating: 5, description: "Loaded with choco chips." },
+    { name: "Black Forest Cake", category: "Cake", image: "assets/images/blackforest.jpg", price: 400, rating: 4, description: "Classic cake with cherries and cream." },
+    { name: "Cream Roll", category: "Pastry", image: "assets/images/c8.jpg", price: 65, rating: 3, description: "Soft roll filled with fresh cream." },
+    { name: "Mango Mousse Cake", category: "Cake", image: "assets/images/d8.jpg", price: 480, rating: 5, description: "Tropical mango mousse goodness." },
+    { name: "Oreo Cupcake", category: "Cupcake", image: "assets/images/e8.jpg", price: 110, rating: 5, description: "Cupcake topped with Oreo bits." },
+    { name: "Garlic Breadsticks", category: "Bread", image: "assets/images/f8.jpg", price: 70, rating: 4, description: "Crunchy and buttery breadsticks." },
+    { name: "Butter Cookie", category: "Cookie", image: "assets/images/g8.jpg", price: 40, rating: 3, description: "Buttery melt-in-mouth cookies." },
+    { name: "Fruit Pastry", category: "Pastry", image: "assets/images/fruit.jpg", price: 75, rating: 4, description: "Topped with seasonal fruits." },
+    { name: "Coffee Cake", category: "Cake", image: "assets/images/h8.jpg", price: 410, rating: 4, description: "Rich coffee flavor in each bite." },
+    { name: "Chocolate Cupcake", category: "Cupcake", image: "assets/images/i8.jpg", price: 95, rating: 5, description: "Moist and chocolaty cupcake." },
+    { name: "Baguette", category: "Bread", image: "assets/images/j8.jpg", price: 85, rating: 4, description: "French-style long bread." },
+    { name: "Oat Cookie", category: "Cookie", image: "assets/images/k8.jpg", price: 45, rating: 3, description: "Healthy oats with light sweetness." }
+  ];
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const menuContainer = document.getElementById("menuContainer");
+
+  function renderProducts() {
+    const searchText = document.getElementById("searchInput").value.toLowerCase();
+    const category = document.getElementById("categoryFilter").value;
+    menuContainer.innerHTML = "";
+
+    products.forEach((item, i) => {
+      if (
+        (category === "All" || item.category === category) &&
+        item.name.toLowerCase().includes(searchText)
+      ) {
+        menuContainer.innerHTML += `
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="${item.image}" class="card-img-top" alt="${item.name}">
+            <div class="card-body">
+              <h5 class="card-title">${item.name}</h5>
+              <p class="text-muted">${item.category}</p>
+              <p class="rating">⭐️ ${"⭐️".repeat(item.rating)}</p>
+              <p>₹${item.price}</p>
+              <p>${item.description}</p>
+              <div class="input-group mb-2">
+                <button class="btn btn-outline-secondary" onclick="changeQty('qty-${i}', -1)">-</button>
+                <input type="number" id="qty-${i}" class="form-control text-center" value="1" min="1" style="max-width: 60px;">
+                <button class="btn btn-outline-secondary" onclick="changeQty('qty-${i}', 1)">+</button>
+              </div>
+              <button class="btn btn-success w-100" onclick="addToCart(${i})">Add to Cart</button>
+            </div>
+          </div>
+        </div>`;
+      }
+    });
+  }
+
+  function changeQty(id, delta) {
+    const qtyInput = document.getElementById(id);
+    let val = parseInt(qtyInput.value);
+    val = isNaN(val) ? 1 : val + delta;
+    if (val < 1) val = 1;
+    qtyInput.value = val;
+  }
+
+  function addToCart(index) {
+    const qty = parseInt(document.getElementById(`qty-${index}`).value);
+    const item = products[index];
+    const existing = cart.find(p => p.name === item.name);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ ...item, qty });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+    alert(`${qty} x ${item.name} added to cart!`);
+  }
+
+  function renderCart() {
+    const cartBody = document.getElementById("cartBody");
+    const cartTotal = document.getElementById("cartTotal");
+    cartBody.innerHTML = "";
+
+    if (cart.length === 0) {
+      cartBody.innerHTML = "<p class='text-muted'>No items in cart.</p>";
+      cartTotal.textContent = "0";
+      return;
+    }
+
+    let total = 0;
+    cart.forEach((item, i) => {
+      total += item.qty * item.price;
+      cartBody.innerHTML += `
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <strong>${item.name}</strong><br>
+            <small>${item.qty} × ₹${item.price}</small>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${i})">Remove</button>
+          </div>
+        </div>`;
+    });
+
+    cartTotal.textContent = total;
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  function checkout() {
+    if (cart.length === 0) return alert("Cart is empty!");
+    alert("Thank you for your purchase!");
+    cart.length = 0;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  document.getElementById("searchInput").addEventListener("input", renderProducts);
+  document.getElementById("categoryFilter").addEventListener("change", renderProducts);
+
+  renderProducts();
+  renderCart();
+</script>
+
+</body>
+</html>

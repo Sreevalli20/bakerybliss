@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist Page</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <a class="navbar-brand" href="index.html">
+    <strong>BakeBliss 🍪</strong>
+</a>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .card {
+      transition: 0.3s;
+    }
+    .wishlist-btn {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    .wishlist-btn.active {
+      color: red;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h2 class="text-center mb-4">✨ Our Products</h2>
+    <div class="row" id="product-list">
+      <!-- Products -->
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <img src="assets/images/f1.jpg" class="card-img-top" alt="Product 1">
+            <div class="card-body">
+            <h5 class="card-title">Sweet Candy</h5>
+            <p class="card-text">$4.99</p>
+            <span class="wishlist-btn" onclick="addToWishlist(this, 'Sweet Candy', '$4.99', 'assets/images/f1.jpg')">💖</span>
+          </div>
+        </div>
+     
+      
+      <!-- Add more products as needed -->
+    </div>
+
+    <h3 class="text-center mt-5 mb-3">🧡 Your Wishlist</h3>
+    <div class="row" id="wishlist-section">
+      <!-- Wishlist items will be added here -->
+    </div>
+  </div>
+
+  <script>
+    function addToWishlist(el, title, price, img) {
+      el.classList.toggle('active');
+
+      const isActive = el.classList.contains('active');
+      const wishlist = document.getElementById('wishlist-section');
+
+      // Check if already added
+      if (isActive) {
+        const newItem = document.createElement('div');
+        newItem.className = 'col-md-4 mb-4 wishlist-item';
+        newItem.innerHTML = `
+          <div class="card shadow-sm">
+            <img src="${img}" class="card-img-top" alt="${title}">
+            <div class="card-body">
+              <h5 class="card-title">${title}</h5>
+              <p class="card-text">${price}</p>
+              <button class="btn btn-sm btn-danger" onclick="removeFromWishlist(this)">Remove</button>
+            </div>
+          </div>`;
+        wishlist.appendChild(newItem);
+      } else {
+        // Remove item from wishlist
+        const items = wishlist.getElementsByClassName('wishlist-item');
+        for (let i = 0; i < items.length; i++) {
+          const itemTitle = items[i].querySelector('.card-title').textContent;
+          if (itemTitle === title) {
+            items[i].remove();
+            break;
+          }
+        }
+      }
+    }
+
+    function removeFromWishlist(btn) {
+      const card = btn.closest('.wishlist-item');
+      const title = card.querySelector('.card-title').textContent;
+
+      // Uncheck the original heart
+      const productList = document.getElementById('product-list').getElementsByClassName('card');
+      for (let i = 0; i < productList.length; i++) {
+        const productTitle = productList[i].querySelector('.card-title').textContent;
+        if (productTitle === title) {
+          const heart = productList[i].querySelector('.wishlist-btn');
+          heart.classList.remove('active');
+        }
+      }
+
+      card.remove();
+    }
+  </script>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

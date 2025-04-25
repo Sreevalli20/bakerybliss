@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>BakeBliss - Home</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css"/>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            z-index: 1000;
+        }
+
+        .hero-section {
+            background-image: url('images/hero-bg.jpg'); /* Replace with your hero image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 50px;
+        }
+
+        .cat-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-items {
+            background-color: #f8f9fa;
+        }
+
+        .testimonial-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .bg-offer {
+            background-color: #e9ecef;
+        }
+
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .blur-glass {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(to right, #ff6e7f, #bfe9ff);
+            border: none;
+            color: white;
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #007bff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .category-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-list .product-item {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-sidebar button {
+            float: right;
+            border: none;
+            background: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .cart-icon-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 1002;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode .navbar {
+            background-color: #444;
+        }
+
+        .dark-mode .cat-card, .dark-mode .testimonial-card {
+            background-color: #555;
+            color: white;
+        }
+
+        .dark-mode .featured-items, .dark-mode .bg-offer {
+            background-color: #444;
+        }
+
+        .dark-mode footer {
+            background-color: #222;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Loading BakeBliss...</p>
+    </div>
+
+    <header class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm blur-glass">
+        <div class="container">
+            <a class="navbar-brand" href="spinwheel.html">
+                <strong>BakeBliss</strong>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="wishlist.html" class="nav-link"><button class="wishlist-btn">Add to Wishlist</button></a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="custom_order.html" class="nav-link">Custom orders</a></li>
+                    <li class="nav-item"><a href="track_order.html" class="nav-link">Track order</a></li>
+                    <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
+                    <li class="nav-item"><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
+                    <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+                    <li class="nav-item"><a href="cart.html" class="nav-link">Cart <i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                    <li class="nav-item"><button id="themeToggle" class="btn btn-sm rounded-pill">🌙</button></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <header class="hero-section">
+        <div class="hero-overlay">
+            <h1>Freshly Baked Happiness 🍰</h1>
+            <p>Order from your favorite local bakery with one click</p>
+            <a href="list.html" class="btn gradient-btn mt-3">Browse Menu</a>
+        </div>
+    </header>
+
+    <section class="container mt-5 pt-4" id="menu">
+        <h2 class="text-center mb-4">Our Specials</h2>
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <div class="cat-card">
+                    <a href="cake.html">
+                    <img src="assets/images/cake.jpg" alt="Cakes" style="width:100px; height: 100px; object-fit: contain;">
+                    
+                </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="cat-card">
+                    <a href="bread.html">
+                    <img src="assets/images/breads.jpg" alt="Breads" style="width:100px; height: 100px; object-fit: contain;">
+                    
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="cat-card">
+                    <a href="cookie.html">
+                    <img src="assets/images/cookie.jpg" alt="Cookies" style="width:100px; height: 100px; object-fit: contain;">
+                    
+                </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="cat-card">
+                    <a href ="cupcakes.html">
+                    <img src="assets/images/cupcake.jpg" alt="Cupcakes" style="width:100px; height: 100px; object-fit: contain;">
+                    
+                </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-items mt-5 py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4"><a href="seller.html">Best Sellers</a></h2>
+            <div class="row" id="featuredProducts">
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-offer">
+        <div class="container py-5">
+            <h2 class="text-center mb-4">Today’s Sweet Deals 🎁</h2>
+            <div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <img src="assets/images/c1.jpg" class="d-block w-100" alt="Offer 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/images/c2.png" class="d-block w-100" alt="Offer 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/images/b3.jpeg" class="d-block w-100" alt="Offer 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/images/c3.jpeg" class="d-block w-100" alt="Offer 4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/images/b5.jpg" class="d-block w-100" alt="Offer 5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="cartSidebar" class="cart-sidebar">
+        <button onclick="closeCart()">✖</button>
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <a href="checkout.html" class="checkout-btn">Checkout</a>
+    </div>
+    
+    <button onclick="openCart()" class="cart-icon-btn">🛒 Cart</button>
+    
+    <section class="testimonials bg-white py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">What Customers Say 💬</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Best cupcakes in town! Super fresh and beautiful packing!"</p>
+                        <h6>- Riya, Hyderabad</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"I loved the delivery time tracking. The cakes taste just like home!"</p>
+                        <h6>- Arjun, Vijayawada</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"So easy to order. I use BakeBliss for every party at home."</p>
+                        <h6>- Sneha, Vizag</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center p-4 mt-5">
+        <p>&copy; 2025 BakeBliss. Made with ❤️ in India.</p>
+    </footer>
+
+    <button onclick="scrollToTop()" class="scroll-top-btn"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            const scrollTopBtn = document.querySelector('.scroll-top-btn');
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+        }
+    
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+        }
+    
+        // Example cart population (replace with dynamic logic)
+        const cartItems = document.getElementById('cartItems');
+        cartItems.innerHTML = '<p>1x Product A</p><p>2x Product B</p>';
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="assets/script.js"></script>
+
+</body>
+</html>
